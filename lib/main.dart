@@ -12,22 +12,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: const MyHomePage(title: 'Flutter '),
+      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.blueAccent)),
+      home: const CounterPage(title: 'Flutter Counter App'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title, this.color = Colors.red});
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key, required this.title});
   final String title;
-  final Color color;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CounterPage> createState() => _CounterPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CounterPageState extends State<CounterPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -41,6 +40,27 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
+  void _increment2Counter() {
+    setState(() {
+      _counter = _counter + 2;
+    });
+  }
+
+  void _decrement2Counter() {
+    _counter = _counter - 2;
+    setState(() {});
+  }
+
+  void _mutiplyCounter() {
+    _counter = _counter * 2;
+    setState(() {});
+  }
+
+  void _devideCounter() {
+    _counter = _counter ~/ 2;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,29 +70,62 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: .center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('You have pushed the button this many times:'),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: _incrementCounter, child: Text('+')),
-                ElevatedButton(onPressed: _decrementCounter, child: Text("-")),
-              ],
-            ),
-            Row(
-              children: [
-                ElevatedButton(onPressed: _incrementCounter, child: Text('+')),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ),
+                  onPressed: _increment2Counter,
+                  child: Text('+ 2'),
                 ),
-                ElevatedButton(onPressed: _decrementCounter, child: Text("-")),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  onPressed: _decrement2Counter,
+                  child: Text("- 2"),
+                ),
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                ElevatedButton(onPressed: _incrementCounter, child: Text('+')),
-                ElevatedButton(onPressed: _decrementCounter, child: Text("-")),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                  onPressed: _incrementCounter,
+                  child: Text('+ 1'),
+                ),
+                Text(
+                  'Dein Ergebnis:' + '\n' + '$_counter',
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.orange,
+                  ),
+                  onPressed: _decrementCounter,
+                  child: Text("- 1"),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.yellow,
+                  ),
+                  onPressed: _mutiplyCounter,
+                  child: Text('* 2'),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+                  onPressed: _devideCounter,
+                  child: Text("/ 2"),
+                ),
               ],
             ),
           ],
